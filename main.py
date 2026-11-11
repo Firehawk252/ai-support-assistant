@@ -16,6 +16,7 @@ import ollama
 import os
 import json
 
+# Sends the conversation history to the local AI model and displays its response
 def ask_ai(messages):
 
     try:
@@ -31,6 +32,7 @@ def ask_ai(messages):
         print(error)
         print("AI service is unavailable. Please try again.")
 
+# Initializes a new conversation with the system instructions for the AI assistant
 def create_messages():
     messages = [
         {"role": "system", "content": "You are an IT support technician. Provide clear, step-by-step troubleshooting"
@@ -115,13 +117,17 @@ def rename_conversation(filename, new_filename):
     else:
         print("File not found.")
 
+# Runs the main application loop and handles user input and commands
 def main():
+    # Displays the application title
     print("=================================")
     print("     AI IT Support Assistant")
     print("=================================")
 
+    # Initializes a new conversation
     messages = create_messages()
 
+    # Keeps the application running until the user exits
     while True:
         question = input("You: \n")
         if question == "":
@@ -218,6 +224,7 @@ def main():
             print("'history' will display the conversation so far")
             print("'help' will display available commands")
             continue
+        # Adds the user's question to the conversation and sends it to the AI
         messages.append({"role": "user", "content": question})
         ask_ai(messages)
 
